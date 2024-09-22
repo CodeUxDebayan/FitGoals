@@ -8,6 +8,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Tippy.js for popover -->
+<link rel="stylesheet" href="https://unpkg.com/tippy.js@6.3.1/dist/tippy.css" />
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+
   <style>
     /* General Styles */
     * {
@@ -702,43 +707,43 @@ body::-webkit-scrollbar-thumb {
         <div data-aos="fade-right" data-aos-duration="3000" class="pricing-card">
           <h3>Basic Plan</h3>
           <p class="price">$19<span>/month</span></p>
-          <ul class="features">
+          <ul class="features" id="basic">
             <li>Access to gym equipment</li>
             <li>1 Group class per week</li>
             <li>1 Personal training session</li>
           </ul>
-          <button data-price="19" onclick="goToCheckout('Basic Plan', 19)" class="cta-btn">Choose Plan</button>
+          <button data-price="19" onclick="goToCheckout('Basic Plan', 19, 'basic')" class="cta-btn">Choose Plan</button>
         </div>
         
         <!-- Pro Plan -->
         <div data-aos="fade-right" data-aos-duration="3000" class="pricing-card featured">
           <h3>Pro Plan</h3>
           <p class="price">$49<span>/month</span></p>
-          <ul class="features">
+          <ul class="features" id="pro">
             <li>Access to gym equipment</li>
             <li>Unlimited Group classes</li>
             <li>4 Personal training sessions</li>
             <li>Access to swimming pool</li>
           </ul>
-          <button data-price="49" onclick="goToCheckout('Basic Plan', 49)" href="./checkout.html" class="cta-btn">Choose Plan</button>
+          <button data-price="49" onclick="goToCheckout('Pro Plan', 49, 'pro')" href="./checkout.html" class="cta-btn">Choose Plan</button>
         </div>
     
         <!-- Premium Plan -->
         <div data-aos="fade-right" data-aos-duration="3000" class="pricing-card">
           <h3>Premium Plan</h3>
           <p class="price">$99<span>/month</span></p>
-          <ul class="features">
+          <ul class="features" id="premium">
             <li>Access to gym equipment</li>
             <li>Unlimited Group classes</li>
             <li>Unlimited Personal training</li>
             <li>Access to swimming pool & sauna</li>
           </ul>
-          <button data-price="99" onclick="goToCheckout('Basic Plan', 99)" href="./checkout.html" class="cta-btn">Choose Plan</button>
+          <button data-price="99" onclick="goToCheckout('Premium Plan', 99, 'premium')" href="./checkout.html" class="cta-btn">Choose Plan</button>
         </div>
       </div>
     </section>
     
-  
+
     <!-- Testimonials Section -->
     <section id="testimonials">
       <h1 data-aos="fade-down" data-aos-duration="3000">What Our Members Say</h1>
@@ -827,11 +832,21 @@ body::-webkit-scrollbar-thumb {
     AOS.init();
   </script>
 <script>
-  function goToCheckout(planName, planPrice) {
+  function goToCheckout(planName, planPrice, planId) {
+
+      localStorage.clear();
       // Save selected plan details in local storage (or session storage)
       localStorage.setItem('selectedPlanName', planName);
       localStorage.setItem('selectedPlanPrice', planPrice);
 
+      const plan = document.getElementById(planId);
+      const features = plan.querySelectorAll('li');
+      const planFeatures = [];
+      features.forEach(feature => {
+          planFeatures.push(feature.textContent);
+      });
+      localStorage.setItem('selectedPlanFeatures', JSON.stringify(planFeatures)); 
+      
       // Redirect to checkout page
       window.location.href = 'checkout.html';
   }

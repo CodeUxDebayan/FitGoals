@@ -245,7 +245,7 @@
 
                 <div class="selected-plan">
                     <h3 id="plan-name">Standard Plan</h3>
-                    <p><strong id="plan-price">$49</strong> / month</p>
+                    <h4 id="plan-price1">$49 / month</h4>
                 </div>
 
                 <ul class="plan-features">
@@ -263,11 +263,22 @@
         // Get selected plan details from local storage
         const planName = localStorage.getItem('selectedPlanName');
         const planPrice = localStorage.getItem('selectedPlanPrice');
-        console.log(planName, planPrice);
+        const planFeatures = JSON.parse(localStorage.getItem('selectedPlanFeatures'));
+        console.log(planFeatures);
+        // Display the selected plan details
+            const planFeaturesList = document.querySelector('.plan-features');
+            planFeaturesList.innerHTML = '';
+            planFeatures.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                planFeaturesList.appendChild(li);
+            });
+        
         // Display the plan name and price on the checkout page
         document.getElementById('plan-name').innerHTML = `${planName}`;
         document.getElementById('plan-price').innerHTML = `$${planPrice}`;
         document.getElementById('plan-final').innerHTML = `$${Number(planPrice) + 1}`;
+        document.getElementById('plan-price1').innerHTML = `$${planPrice} / month`;
     </script>
 </body>
 
