@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitgoals Gym</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html{
+      scroll-behavior: smooth;
+    }
+    
+body {
+  --sb-track-color: #232E33;
+  --sb-thumb-color: #82af1a;
+  --sb-size: 15px;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size)
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 10px;
+  border: 3px solid #232E33;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
+}
+    body {
+      font-family: 'Playfair Display', serif;
+      background-color: #1a1a1a;
+      color: white;
+      background-color: #0d0d0d;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    section {scroll-behavior: smooth;
+      padding: 60px 10%;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: 4rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.1rem;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 10%;
+      background-color: transparent;
+      position: fixed;
+      border-bottom: #9fe300 2px solid;
+      top: 0%;
+      width: 100%;
+      z-index: 10;
+      -webkit-backdrop-filter: blur(10px); /* Background blur effect */
+      -moz-backface-filter: blur(10px);
+      backdrop-filter: blur(10px); /* Background blur effect */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-links ul {
+      list-style-type: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .navbar-links ul li {
+      color: #ccc;
+    }
+
+    .navbar-links ul li a:hover {
+      color: #b3ff00;
+    }
+
+    .join-now {
+      background-color: #b3ff00;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: black;
+    }
+
+    .join-now:hover {
+      background-color: #9fe300;
+    }
+
+    /* Logo with small icon */
+    .logo {
+      display: flex;
+      align-items: center;
+      text-shadow: #00000052 2px 2px 2px;
+    }
+
+    .logo-icon {
+      color: #b3ff00;
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      font-size: 1.2rem;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 5px;
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    .mobile-menu ul {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #1a1a1a;
+      padding: 20px;
+      position: absolute;
+      top: 60px;
+      right: 10%;
+      width: 200px;
+      border-radius: 5px;
+      z-index: 10;
+    }
+
+    .mobile-menu ul li {
+      color: #ccc;
+      text-align: center;
+    }
+
+    .mobile-menu ul li:hover {
+      color: #b3ff00;
+    }
+
+    /* Hero Section */
+    #hero {
+      height: 100vh;
+      margin: 80px 60px;
+      background-image: url('./images/hero-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      
+    }
+
+  
+
+    #hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 150px;
+      text-align: center;
+    }
+
+    #hero-content h1 {
+      font-size: 4rem;
+      line-height: 1.2;
+    }
+
+    #hero-content p {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      max-width: 600px;
+    }
+
+    .cta-buttons {
+      margin-top: 30px;
+    }
+
+    .cta-buttons a {
+      display: inline-block;
+      padding: 15px 30px;
+      margin-right: 20px;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .cta-join-now {
+      background-color: #b3ff00;
+      color: black;
+    }
+
+    .cta-join-now:hover {
+      background-color: #9fe300;
+    }
+
+    .cta-free-trial {
+      border: 2px solid white;
+    }
+
+    .cta-free-trial:hover {
+      background-color: #333;
+    }
+
+    /* Services Section */
+    #services {
+      background-color: #0d0d0d;
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      padding: 150px 120px 150px 120px;
+    }
+
+    #services .service-card {
+      background-color: #000000;
+      box-shadow: 0 4px 15px rgba(188, 188, 188, 0.1);
+      padding: 30px 30px 100px 30px;
+      border-radius: 5px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+    }
+
+    #services .service-card h3 {
+      margin-bottom: 10px;
+    }
+    #services .service-card img{
+      border-radius: 5px;
+      filter: blur(0.5px) ;
+    }
+    #services .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    /* Facility Section */
+    #facility {
+      background-color: #0d0d0d;
+      flex-direction: column;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      padding:120px;
+      
+    }
+
+    #facility img {
+      width: 100%;
+      border-radius: 5px;
+      filter: blur(1px) grayscale(20%);
+    }
+
+  
+   /* Pricing Section Styles */
+  #pricing {
+    background-color: #0d0d0d;
+    padding: 160px 10%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  #pricing h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #ffffff;
+  }
+
+  .pricing-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .pricing-card {
+    background-color: rgb(0, 0, 0);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(117, 117, 117, 0.1);
+    transition: transform 0.3s ease;
+    width: 300px;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-10px);
+    cursor: pointer;
+  }
+
+  .pricing-card.featured {
+    border: 2px solid #b3ff00;
+  }
+
+  .pricing-card h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+  }
+
+  .pricing-card .price {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #b3ff00;
+  }
+
+  .pricing-card .price span {
+    font-size: 1.2rem;
+    font-weight: normal;
+  }
+
+  .pricing-card .features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+  }
+
+  .pricing-card .features li {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+
+  .pricing-card .cta-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #b3ff00;
+    color: black;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .pricing-card .cta-btn:hover {
+    background-color: #9fe300;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .pricing-grid {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+    /* Membership Section */
+    #join {
+      background-color: #1a1a1a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px 10%;
+    }
+
+    #join .membership-info {
+      display: flex;
+      align-items: center;
+      font-size: 3rem;
+    }
+
+    #join .price {
+      color: #b3ff00;
+      margin-right: 10px;
+    }
+
+    #join .buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    /* Testimonials Section */
+    #testimonials {
+      background-color: #0d0d0d;
+      display: grid;
+      flex-direction: column;
+      align-items: center;
+      padding: 150px;
+      gap: 50px;
+    }
+
+    #testimonials .testimonial-item {
+      text-align: center;
+      padding: 50px 20px 150px 20px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      color: #000000;
+      border: #9fe300 2px solid;
+    }
+
+    #testimonials .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    #testimonials .testimonial-item img {
+      border-radius: 50%;
+      width: 80px;
+      margin-bottom: 10px;
+    }
+
+    #testimonials h3 {
+      font-size: 1.5rem;
+      margin: 10px 0;
+    }
+
+    #testimonials p {
+      font-size: 1rem;
+      font-style: italic;
+      color: #000000;
+    }
+
+    /* Star Rating */
+  .rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 15px;
+  }
+
+  .star {
+    font-size: 2rem;
+    color: #ccc; /* default color of the stars */
+    
+    transition: color 0.3s ease;
+  }
+
+  .star.selected {
+    color: #ffcc00; /* color for selected or hovered stars */
+  }
+    /* Programs Section */
+    #programs {
+      background-color: #0d0d0d;
+      display: grid;
+      flex-direction: column;
+      align-items: center;
+      gap: 80px;
+      padding: 150px;
+    }
+
+    #programs .program-card {
+      background-color: #333;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 35px;
+    }
+    #programs p{
+      max-width: 350px;
+      height: 80px;
+    }
+    #programs img{
+      border-radius: 5px;
+      filter: blur(1px) grayscale(20%);
+    }
+    #programs .program-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    /* Newsletter Section */
+    #newsletter {
+      background-color: #0d0d0d;
+      padding: 50px 10%;
+      text-align: center;
+    }
+
+    #newsletter h2 {
+      margin-bottom: 20px;
+    }
+    #newsletter p {
+      margin-top: -20px;
+    }
+
+    #newsletter input[type="email"] {
+      padding: 10px;
+      width: 300px;
+      border-radius: 5px;
+      border: none;
+      margin-top: 40px;
+    }
+
+    #newsletter button {
+      padding: 10px 20px;
+      background-color: #b3ff00;
+      font-weight: 500;
+      border: none;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    #newsletter button:hover {
+      background-color: #9fe300;
+    }
+
+    /* Footer */
+    footer {
+      padding: 20px;
+      text-align: center;
+      background-color: #0d0d0d;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+    }
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+      #hero-content {
+        padding: 0 30px;
+      }
+
+      nav .navbar-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .mobile-menu.active {
+        display: block;
+      }
+
+      .cta-buttons {
+        display: block;
+      }
+
+      .cta-buttons a {
+        display: block;
+        margin-bottom: 15px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      h3 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav data-aos="fade-down" data-aos-duration="3000">
+    <div class="logo">
+      <i class="fas fa-leaf logo-icon"></i>
+      <span style="cursor: pointer;" class="logo-text"><a href="#hero">Fitgoals</a></span>
+    </div>
+    <div class="navbar-links">
+      <ul>
+        <li><a href="#services"><i class="fas fa-dumbbell"></i> Services</a></li>
+        <li><a href="#facility"><i class="fas fa-building"></i> Facility</a></li>
+        <li><a href="#programs"><i class="fas fa-heart"></i> Programs</a></li>
+        <li><a href="#testimonials"><i class="fas fa-users"></i> Testimonials</a></li>
+        <li><a href="#pricing" class="join-now"><i class="fas fa-sign-in-alt"></i> Join Now</a></li>
+      </ul>
+    </div>
+    <!-- Hamburger Menu for Mobile -->
+    <div class="hamburger" onclick="toggleMobileMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="#services"><i class="fas fa-dumbbell"></i> Services</a></li>
+        <li><a href="#facility"><i class="fas fa-building"></i> Facility</a></li>
+        <li><a href="#programs"><i class="fas fa-heart"></i> Programs</a></li>
+        <li><a href="#testimonials"><i class="fas fa-users"></i> Testimonials</a></li>
+        <li><a href="#pricing" class="join-now"><i class="fas fa-sign-in-alt"></i> Join Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" data-aos="zoom-in" data-aos-duration="3000" >
+    <div class="overlay"></div>
+    <div id="hero-content">
+      <h1 >Unleash Your Inner Athlete</h1>
+      <p >We are dedicated to helping you transform your body and mind through the power of fitness.</p>
+      <div class="cta-buttons">
+        <a data-aos="fade-right" data-aos-duration="2000" href="#pricing" class="cta-join-now"><i class="fas fa-check-circle"></i> Join Now</a>
+        <a data-aos="fade-right" data-aos-duration="3000" href="#pricing" class="cta-free-trial"><i class="fas fa-gift"></i> Join Free Trial</a>
+      </div>
+    </div>
+  </section>
+
+    <!-- Services Section -->
+    <section id="services">
+      <h1 data-aos="fade-up" data-aos-duration="3000">Transform Your Fitness Journey</h1>
+      <div class="service-grid">
+        <div data-aos="zoom-in-up" data-aos-duration="3000" class="service-card">
+          <i class="fas fa-user"></i>
+          <h3>Personal Training</h3>
+          <p>Work 1-on-1 with our expert trainers to achieve your personal fitness goals.</p>
+          <img width="400px"  src="./images/personal-trainer.jpg" alt="Personal Training">
+        </div>
+        <div data-aos="zoom-in-up" data-aos-duration="3000" class="service-card">
+          <i class="fas fa-users"></i>
+          <h3>Group Classes</h3>
+          <p>Stay motivated and energized with a variety of group fitness classes.</p>
+          <img width="400px"  src="./images/group-class.jpg" alt="Group Classes">
+        </div>
+        <div data-aos="zoom-in-up" data-aos-duration="3000" class="service-card">
+          <i class="fas fa-apple-alt"></i>
+          <h3>Nutrition Coaching</h3>
+          <p>Receive personalized nutrition advice and meal plans to fuel your fitness journey.</p>
+          <img width="400px"  src="./images/nutrition.jpg" alt="Nutrition Coaching">
+        </div>
+      </div>
+    </section>
+  
+    <!-- Facility Section -->
+    <section  id="facility">
+      <h2 data-aos="fade-down" data-aos-duration="2000">Our State-of-the-Art Facility</h2>
+      <img data-aos="fade-down" data-aos-duration="3000" src="./images/facility.jpg" alt="Gym Facility">
+    </section>
+  
+    <section id="pricing">
+      <h2 data-aos="fade-down" data-aos-duration="3000">Our Pricing Plans</h2>
+      <div class="pricing-grid">
+        <!-- Basic Plan -->
+        <div data-aos="fade-right" data-aos-duration="3000" class="pricing-card">
+          <h3>Basic Plan</h3>
+          <p class="price">$19<span>/month</span></p>
+          <ul class="features">
+            <li>Access to gym equipment</li>
+            <li>1 Group class per week</li>
+            <li>1 Personal training session</li>
+          </ul>
+          <button data-price="19" onclick="goToCheckout('Basic Plan', 19)" class="cta-btn">Choose Plan</button>
+        </div>
+        
+        <!-- Pro Plan -->
+        <div data-aos="fade-right" data-aos-duration="3000" class="pricing-card featured">
+          <h3>Pro Plan</h3>
+          <p class="price">$49<span>/month</span></p>
+          <ul class="features">
+            <li>Access to gym equipment</li>
+            <li>Unlimited Group classes</li>
+            <li>4 Personal training sessions</li>
+            <li>Access to swimming pool</li>
+          </ul>
+          <button data-price="49" onclick="goToCheckout('Basic Plan', 49)" href="./checkout.html" class="cta-btn">Choose Plan</button>
+        </div>
+    
+        <!-- Premium Plan -->
+        <div data-aos="fade-right" data-aos-duration="3000" class="pricing-card">
+          <h3>Premium Plan</h3>
+          <p class="price">$99<span>/month</span></p>
+          <ul class="features">
+            <li>Access to gym equipment</li>
+            <li>Unlimited Group classes</li>
+            <li>Unlimited Personal training</li>
+            <li>Access to swimming pool & sauna</li>
+          </ul>
+          <button data-price="99" onclick="goToCheckout('Basic Plan', 99)" href="./checkout.html" class="cta-btn">Choose Plan</button>
+        </div>
+      </div>
+    </section>
+    
+  
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+      <h1 data-aos="fade-down" data-aos-duration="3000">What Our Members Say</h1>
+      <div class="testimonial-grid">
+        <div data-aos="fade-right" data-aos-duration="3000" class="testimonial-item">
+          <img src="https://api.dicebear.com/9.x/thumbs/svg?seed=jhony" alt="User 1">
+          <h3>John Doe</h3>
+          <div class="rating">
+            <span class="star selected" data-value="1"><i class="fas fa-star fa-sm" ></i> </span>
+            <span class="star selected" data-value="2"><i class="fas fa-star fa-sm" ></i></span>
+            <span class="star selected" data-value="3"><i class="fas fa-star fa-sm" ></i></span>
+            <span class="star selected" data-value="4"><i class="fas fa-star fa-sm" ></i></span>
+            <span class="star" data-value="5"><i class="fas fa-star fa-sm" ></i></span>
+          </div>
+          <p>"Fitgoals changed my life. The trainers are amazing and the facility is top-notch!"</p>
+        </div>
+        <div data-aos="fade-right" data-aos-duration="3000" class="testimonial-item">
+          <img src="https://api.dicebear.com/9.x/micah/svg?seed=Janey" alt="User 2">
+          <h3>Jane Smith</h3>
+          <div class="rating">
+            <span class="star selected" data-value="1"><i class="fas fa-star fa-sm" ></i> </span>
+            <span class="star selected" data-value="2"><i class="fas fa-star fa-sm" ></i></span>
+            <span class="star selected" data-value="3"><i class="fas fa-star fa-sm" ></i></span>
+            <span class="star" data-value="4"><i class="fas fa-star fa-sm" ></i></span>
+            <span class="star" data-value="5"><i class="fas fa-star fa-sm" ></i></span>
+          </div>
+          <p>"I’ve never felt more motivated to achieve my fitness goals. The group classes are a game-changer!"</p>
+        </div>
+        <div data-aos="fade-right" data-aos-duration="3000" class="testimonial-item">
+          <img src="https://api.dicebear.com/9.x/lorelei-neutral/svg?seed=rand" alt="User 3">
+          <h3>Mike Johnson</h3>
+          <div class="rating">
+            <span class="star selected" data-value="1"><i class="fas fa-star fa-sm" ></i> </span>
+            <span class="star selected" data-value="2"><i class="fas fa-star fa-sm" ></i></span>
+            <span class="star selected" data-value="3"><i class="fas fa-star fa-sm" ></i></span>
+            <span class="star selected" data-value="4"><i class="fas fa-star fa-sm" ></i></span>
+            <span class="star selected" data-value="5"><i class="fas fa-star fa-sm" ></i></span>
+          </div>
+          <p>"Great facility and even better community. Fitgoals is the best gym I’ve ever joined!"</p>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Programs Section -->
+    <section id="programs">
+      <h2 data-aos="fade-right" data-aos-duration="3000">Our Specialized Programs</h2>
+      <div class="program-grid">
+        <div data-aos="fade-right" data-aos-duration="3000" class="program-card">
+          <h3>Weight Loss Program</h3>
+          <p>Achieve your weight loss goals with our scientifically-backed training and nutrition plan.</p>
+          <img width="400px"  src="./images/weight-loss.jpg" alt="Weight Loss Program">
+        </div>
+        <div data-aos="fade-right" data-aos-duration="3000" class="program-card">
+          <h3>Strength & Conditioning</h3>
+          <p>Build strength and endurance with expert coaching and tailored workouts.</p>
+          <img width="400px"  src="./images/strength.jpg" alt="Strength">
+        </div>
+        <div data-aos="fade-right" data-aos-duration="3000" class="program-card">
+          <h3>Bodybuilding</h3>
+          <p>Sculpt your body with our specialized bodybuilding routines and expert guidance.</p>
+          <img width="400px"  src="./images/body-building.jpg" alt="Bodybuilding">
+        </div>
+      </div>
+    </section>
+  
+    <!-- Newsletter Section -->
+    <section data-aos="fade-down" data-aos-duration="3000" id="newsletter">
+      <h3>Stay Updated with Fitgoals</h3>
+      <p>Subscribe to our newsletter for fitness tips, exclusive deals, and more.</p>
+      <input type="email" placeholder="Enter your email" />
+      <button>Subscribe</button>
+    </section>
+  
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Fitgoals Gym. All rights reserved.</p>
+    </footer>
+  
+  <script>
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById("mobileMenu");
+      mobileMenu.classList.toggle("active");
+    }
+  </script>
+  <script>
+    AOS.init();
+  </script>
+<script>
+  function goToCheckout(planName, planPrice) {
+      // Save selected plan details in local storage (or session storage)
+      localStorage.setItem('selectedPlanName', planName);
+      localStorage.setItem('selectedPlanPrice', planPrice);
+
+      // Redirect to checkout page
+      window.location.href = 'checkout.html';
+  }
+</script>
+
+</body>
+</html>

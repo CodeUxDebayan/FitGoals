@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Playfair Display', sans-serif;
+            background-color: #111;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .success-container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #00ff6a;
+            font-size: 3rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-return {
+            padding: 15px 30px;
+            background-color: #00ff6a;
+            border: none;
+            color: #000;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-return:hover {
+            background-color: #00cc53;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <h1>Payment Successful!</h1>
+        <p>Thank you for your purchase.</p>
+        <button class="btn-return" onclick="returnToHome()">Return to Home</button>
+    </div>
+
+    <script>
+        function returnToHome() {
+            window.location.href = "index.html"; // Change to your actual homepage URL
+        }
+    </script>
+</body>
+</html>
